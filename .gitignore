@@ -1,0 +1,6 @@
+# Ignore local environment files
+.env.*
+!.env.*.template
+
+# Ignore OS-specific files
+.DS_Store

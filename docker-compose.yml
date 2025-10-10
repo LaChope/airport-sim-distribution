@@ -1,0 +1,38 @@
+services:
+  airport-sim-ui:
+    image: ghcr.io/lachope/airport-sim-ui/airport-sim-ui:latest
+    container_name: airport-sim-ui
+    ports:
+      - "8088:80"
+    restart: unless-stopped
+    env_file:
+      - .env.production.template
+
+  airport-sim-server:
+    image: ghcr.io/lachope/airport-sim-server:latest
+    container_name: airport-sim-server
+    restart: unless-stopped
+
+  rstudio:
+    image: rocker/rstudio:latest
+    container_name: airport-sim-rstudio
+    env_file:
+      - .env.rstudio.template
+    volumes:
+      - rstudio_data:/home/rstudio
+    restart: unless-stopped
+
+  auth-server:
+    image: quay.io/keycloak/keycloak:26.2.5
+    container_name: airport-sim-auth
+    env_file:
+      - .env.auth.template
+    volumes:
+      - keycloak_data:/opt/keycloak/data
+    command:
+      - "start"
+    restart: unless-stopped
+
+volumes:
+  keycloak_data:
+  rstudio_data:
