@@ -4,21 +4,17 @@ This repository contains the necessary files to deploy and run the Airport Simul
 
 ---
 
-## About The Project
+## TQ03000934 Project Distribution
 
-The Airport Simulation application provides a dynamic and interactive map-based visualization of airport operations. It is designed to simulate aircraft movements based on real data, offering insights into airport traffic and operations.
-
-### Project Information
-
-This application was developed as part of the student project [TQ03000934 - Research on factors affecting airport traffic performance based on developed predictive model](https://starfos.tacr.cz/en/projekty/TQ03000934?query=6qsaaac7ljwq).
+This application was developed as part of the student project [**Research on factors affecting airport traffic performance based on developed predictive model**](https://starfos.tacr.cz/en/projekty/TQ03000934?query=6qsaaac7ljwq). The aim of the project is to develop a predictive model that will increase the predictability of aircraft movements in the tactical phase of operations based on the traffic situation and the throughput of the airport movement area as well as the accuracy of aircraft departure time estimation. To achieve the maximum level of correspondence with the real system, the model will incorporate the essential decision processes affecting taxiing and aircraft handling (including air traffic control and aircraft crew decision making). By linking experts from the university and industry, with experience in airport operations, programming, and simulation analysis, and using real data, a prototype tool applicable to real airport operations will be developed.
 
 ### Services
 
 This distribution includes the following services, orchestrated by Docker Compose:
 
-* **`airport-sim-ui`**: The web-based user interface for the simulation.
-* **`airport-sim-server`**: The backend server that provides the simulation data.
-* **`rstudio`**: An RStudio environment for data analysis tasks.
+* [**airport-sim-ui**](https://github.com/LaChope/airport-sim-ui): The web-based user interface for the simulation.
+* [**airport-sim-server**](https://github.com/LaChope/airport-sim-server/): The backend server that provides the simulation data.
+* [**rstudio**](https://posit.co/products/open-source/rstudio/?sid=1): An RStudio environment for data analysis tasks.
 
 ---
 
