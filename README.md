@@ -33,7 +33,7 @@ To get the application up and running, follow these simple steps.
     * Rename `env.production.template` to `.env.production`
     * Rename `env.rstudio.template` to `.env.rstudio`
 
-    Open each of these new `.env` files and fill in the required values. **Important:** In your `.env.production` file, you should set `VITE_AUTH_ENABLED` to `false` since authentication has been removed.
+    Open each of these new `.env` files and fill in the required values.
 
     *Example `.env.production`*:
     ```
