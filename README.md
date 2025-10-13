@@ -9,7 +9,7 @@ This distribution includes the following services, orchestrated by Docker Compos
 * [**airport-sim-ui**](https://github.com/LaChope/airport-sim-ui): The web-based user interface for the simulation.
 * [**airport-sim-server**](https://github.com/LaChope/airport-sim-server/): The backend server that provides the simulation data.
 * [**rstudio**](https://posit.co/products/open-source/rstudio/?sid=1): An RStudio environment for data analysis tasks.
-
+* [**auth-server**](https://www.keycloak.org/): A Keycloak instance for user authentication and authorization.
 ---
 
 ## Getting Started
@@ -23,34 +23,78 @@ To get the application up and running, follow these simple steps.
 
 ### Installation and Configuration
 
+Follow the instructions for the setup you wish to run.
+
+---
+
+### Option 1: Running with Keycloak Authentication
+
+This setup enables user authentication through Keycloak.
+
+1.  **Clone the repository:**
+    ```sh
+    git clone https://github.com/LaChope/airport-sim-distribution.git
+    cd airport-sim-distribution
+    ```
+2.  **Configure the environment:**
+    Rename and customize all three template files:
+    * Rename `env.production.template` to `.env.production`
+    * Rename `env.rstudio.template` to `.env.rstudio`
+    * Rename `env.auth.production.template` to `.env.auth.production`
+
+    In your new `.env.production` file, ensure **`VITE_AUTH_ENABLED` is set to `true`** and that the Keycloak variables point to your authentication server.
+
+    *Example `.env.production`*:
+    ```
+    VITE_DATA_SOURCE=remote
+    VITE_AUTH_ENABLED=true # Important: Set to true
+    VITE_API_URL=http://localhost:8000/generate-logs
+    VITE_KEYCLOAK_URL=http://localhost:9090/
+    VITE_KEYCLOAK_REALM=airport-sim-realm
+    VITE_KEYCLOAK_CLIENT_ID=airport-sim-ui-client
+    ```
+    In your `.env.auth.production`, set a strong password for the Keycloak admin.
+
+3. **Set-up the keycloak client:** Follow the [Server Administration Guide](https://www.keycloak.org/docs/latest/server_admin/index.html) to set-up your keycloak instance.
+
+3.  **Run the application:**
+    Use Docker Compose to start all services.
+    ```sh
+    docker-compose up -d
+    ```
+    The application will be available at `http://localhost:8088`, and you will be prompted to log in.
+
+---
+
+### Option 2: Running without Authentication
+
+This is the simplest setup and does not require Keycloak.
+
 1.  **Clone the repository:**
     ```sh
     git clone <your-new-repo-url>
     cd airport-sim-distribution
     ```
 2.  **Configure the environment:**
-    This repository includes template environment files. You will need to rename and customize them for your setup.
+    Rename and customize the following template files:
     * Rename `env.production.template` to `.env.production`
     * Rename `env.rstudio.template` to `.env.rstudio`
 
-    Open each of these new `.env` files and fill in the required values.
+    In your new `.env.production` file, **you must set `VITE_AUTH_ENABLED` to `false`**.
 
     *Example `.env.production`*:
     ```
     VITE_DATA_SOURCE=remote
-    VITE_AUTH_ENABLED=false # Authentication is disabled
+    VITE_AUTH_ENABLED=false # Important: Set to false
     VITE_API_URL=http://localhost:8000/generate-logs
-    ```
-    *Example `.env.rstudio`*:
-    ```
-    PASSWORD=your_strong_password
-    TZ=Europe/Prague
     ```
 
 3.  **Run the application:**
-    Use Docker Compose to start all the services in the background:
+    Use Docker Compose to start the required services.
     ```sh
-    docker-compose up -d
+    docker-compose up -d airport-sim-ui airport-sim-server rstudio
     ```
+    The application will be available at `http://localhost:8088`.
 
-    The application will now be available at `http://localhost:8088` (or your configured port).
+---
+
