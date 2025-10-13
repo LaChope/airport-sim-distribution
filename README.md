@@ -76,7 +76,7 @@ This is the simplest setup and does not require Keycloak.
 
 1.  **Clone the repository:**
     ```sh
-    git clone <your-new-repo-url>
+    git clone https://github.com/LaChope/airport-sim-distribution.git
     cd airport-sim-distribution
     ```
 2.  **Configure the environment:**
