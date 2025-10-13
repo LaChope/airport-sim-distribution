@@ -1,3 +1,7 @@
+<p align="center">
+    <img src="https://cdn.muni.cz/media/3232863/logo-tacr-starfos.png?mode=boxpad&center=0.5,0.5&rnd=132363578900000000&heightratio=0.5&width=270"/>
+</p>
+
 ## TQ03000934 Project Distribution
 
 This application was developed as part of the student project [**Research on factors affecting airport traffic performance based on developed predictive model**](https://starfos.tacr.cz/en/projekty/TQ03000934?query=6qsaaac7ljwq). The aim of the project is to develop a predictive model that will increase the predictability of aircraft movements in the tactical phase of operations based on the traffic situation and the throughput of the airport movement area as well as the accuracy of aircraft departure time estimation. To achieve the maximum level of correspondence with the real system, the model will incorporate the essential decision processes affecting taxiing and aircraft handling (including air traffic control and aircraft crew decision making). By linking experts from the university and industry, with experience in airport operations, programming, and simulation analysis, and using real data, a prototype tool applicable to real airport operations will be developed.
@@ -95,6 +99,4 @@ This is the simplest setup and does not require Keycloak.
     docker-compose up -d airport-sim-ui airport-sim-server rstudio
     ```
     The application will be available at `http://localhost:8088`.
-
----
 
