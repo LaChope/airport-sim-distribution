@@ -1,4 +1,4 @@
-<p align="center">
+<p>
     <img src="https://cdn.muni.cz/media/3232863/logo-tacr-starfos.png?mode=boxpad&center=0.5,0.5&rnd=132363578900000000&heightratio=0.5&width=270"/>
 </p>
 
