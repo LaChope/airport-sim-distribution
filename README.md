@@ -40,7 +40,6 @@ To get the application up and running, follow these simple steps.
     VITE_DATA_SOURCE=remote
     VITE_AUTH_ENABLED=false # Authentication is disabled
     VITE_API_URL=http://localhost:8000/generate-logs
-    # ... other variables can be removed if they are auth-related
     ```
     *Example `.env.rstudio`*:
     ```
