@@ -5,28 +5,32 @@ services:
     ports:
       - "8088:80"
     restart: unless-stopped
-    env_file:
-      - .env.production.template
+    environment:
+      - VITE_AUTH_ENABLED=${VITE_AUTH_ENABLED:-true}
+      - VITE_DATA_SOURCE=remote
+      - VITE_API_URL=http://localhost:8000/generate-logs
+      - VITE_KEYCLOAK_URL=${KC_HOSTNAME_URL:-http://localhost:9090/services/auth}
+      - VITE_KEYCLOAK_REALM=airport-sim-realm
+      - VITE_KEYCLOAK_CLIENT_ID=airport-sim-ui-client
 
   airport-sim-server:
     image: ghcr.io/lachope/airport-sim-server:latest
     container_name: airport-sim-server
     restart: unless-stopped
 
-  rstudio:
-    image: rocker/rstudio:latest
-    container_name: airport-sim-rstudio
-    env_file:
-      - .env.rstudio.template
-    volumes:
-      - rstudio_data:/home/rstudio
-    restart: unless-stopped
-
   auth-server:
     image: quay.io/keycloak/keycloak:26.2.5
     container_name: airport-sim-auth
-    env_file:
-      - .env.auth.template
+    environment:
+      - KC_BOOTSTRAP_ADMIN_USERNAME=admin
+      - KC_BOOTSTRAP_ADMIN_PASSWORD=admin
+      - KC_HTTP_RELATIVE_PATH=/services/auth
+      - KC_DB=dev-file
+      - KC_HTTP_ENABLED=true
+      - KC_HOSTNAME=${KC_HOSTNAME:-localhost}
+      - KC_HOSTNAME_URL=${KC_HOSTNAME_URL:-http://localhost:9090/services/auth}
+      - KC_HOSTNAME_STRICT_HTTPS=true
+      - KC_PROXY_HEADERS=xforwarded
     volumes:
       - keycloak_data:/opt/keycloak/data
     command:
