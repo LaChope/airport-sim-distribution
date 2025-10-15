@@ -1,6 +1,6 @@
 services:
   airport-sim-ui:
-    image: ghcr.io/lachope/airport-sim-ui/airport-sim-ui:latest
+    image: lachope/airport-sim-ui:latest
     container_name: airport-sim-ui
     ports:
       - "8088:80"
@@ -8,14 +8,18 @@ services:
     environment:
       - VITE_AUTH_ENABLED=${VITE_AUTH_ENABLED:-true}
       - VITE_DATA_SOURCE=remote
-      - VITE_API_URL=http://localhost:8000/generate-logs
+      - VITE_API_URL=http://localhost:8000/
       - VITE_KEYCLOAK_URL=${KC_HOSTNAME_URL:-http://localhost:9090/services/auth}
       - VITE_KEYCLOAK_REALM=airport-sim-realm
       - VITE_KEYCLOAK_CLIENT_ID=airport-sim-ui-client
 
   airport-sim-server:
-    image: ghcr.io/lachope/airport-sim-server:latest
+    image: lachope/airport-sim-server:latest
     container_name: airport-sim-server
+    ports:
+      - "8000:8000"
+    environment:
+      - CORS_ORIGINS=http://localhost:8088
     restart: unless-stopped
 
   auth-server:
