@@ -6,10 +6,10 @@ services:
       - "8088:80"
     restart: unless-stopped
     environment:
-      - VITE_AUTH_ENABLED=${VITE_AUTH_ENABLED:-false}
+      - VITE_AUTH_ENABLED=${VITE_AUTH_ENABLED:-true}
       - VITE_DATA_SOURCE=remote
       - VITE_API_URL=http://localhost:8000/
-      - VITE_KEYCLOAK_URL=${KC_HOSTNAME_URL:-http://localhost:9090/services/auth}
+      - VITE_KEYCLOAK_URL=${KC_HOSTNAME_URL:-http://localhost:8080/services/auth}
       - VITE_KEYCLOAK_REALM=airport-sim-realm
       - VITE_KEYCLOAK_CLIENT_ID=airport-sim-ui-client
 
@@ -32,13 +32,16 @@ services:
       - KC_DB=dev-file
       - KC_HTTP_ENABLED=true
       - KC_HOSTNAME=${KC_HOSTNAME:-localhost}
-      - KC_HOSTNAME_URL=${KC_HOSTNAME_URL:-http://localhost:9090/services/auth}
-      - KC_HOSTNAME_STRICT_HTTPS=true
+      - KC_HTTP_RELATIVE_PATH=/services/auth
+      - KC_HOSTNAME_STRICT_HTTPS=false
       - KC_PROXY_HEADERS=xforwarded
     volumes:
       - keycloak_data:/opt/keycloak/data
+      - ./keycloak-theme-for-kc-all-other-versions.jar:/opt/keycloak/providers/keycloak-theme-for-kc-all-other-versions.jar
     command:
       - "start"
+    ports:
+      - "8080:8080"
     restart: unless-stopped
 
 volumes:
